@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九里飄香 - 桂花綜合學術與生活應用專題網</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Noto Serif TC', 'serif'],
+                    },
+                    colors: {
+                        gold: {
+                            50: '#fdfbeb', 100: '#fbf5c4', 200: '#f7ea89', 300: '#f2da52',
+                            400: '#ecc428', 500: '#d4aa17', 600: '#b28510', 700: '#8e620f',
+                            800: '#734e12', 950: '#432a05',
+                        },
+                        forest: {
+                            50: '#f2f8f5', 100: '#e1ede7', 200: '#c5dbd1', 300: '#9cbdb0',
+                            400: '#6f9a89', 500: '#4e7e6d', 600: '#3c6456', 700: '#325147',
+                            800: '#2a433c', 950: '#142420',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .faq-content, .diy-content {
+            transition: all 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased text-base selection:bg-gold-200 selection:text-gold-950">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                   <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-gold-500 to-amber-400 flex items-center justify-center text-white shadow-md">
+                        <i data-lucide="flower" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-xl sm:text-2xl tracking-wider text-forest-950 block leading-tight">九里飄香</span>
+                        <span class="text-xs text-stone-500 tracking-widest block uppercase font-mono">Osmanthus</span>
+                    </div>
+                </div>
+
+                <nav class="hidden lg:flex space-x-2">
+                    <a href="#varieties" class="px-4 py-2 rounded-full text-base font-medium text-stone-600 hover:text-gold-700 hover:bg-gold-50 transition">四大名桂</a>
+                    <a href="#cultivation" class="px-4 py-2 rounded-full text-base font-medium text-stone-600 hover:text-gold-700 hover:bg-gold-50 transition">栽培指南</a>
+                    <a href="#interactive" class="px-4 py-2 rounded-full text-base font-medium text-stone-600 hover:text-gold-700 hover:bg-gold-50 transition">智慧助手</a>
+                    <a href="#diy" class="px-4 py-2 rounded-full text-base font-medium text-stone-600 hover:text-gold-700 hover:bg-gold-50 transition">手作工藝</a>
+                    <a href="#faq" class="px-4 py-2 rounded-full text-base font-medium text-stone-600 hover:text-gold-700 hover:bg-gold-50 transition">常見問答</a>
+                </nav>
+
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="p-2 rounded-lg text-stone-600 hover:bg-stone-100 focus:outline-none">
+                        <i data-lucide="menu" id="menu-icon" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2 shadow-lg absolute w-full">
+            <a href="#varieties" class="mobile-nav-link block px-4 py-3 rounded-lg text-stone-700 hover:bg-gold-50 hover:text-gold-700 transition text-lg font-medium">四大名桂</a>
+            <a href="#cultivation" class="mobile-nav-link block px-4 py-3 rounded-lg text-stone-700 hover:bg-gold-50 hover:text-gold-700 transition text-lg font-medium">栽培指南</a>
+            <a href="#interactive" class="mobile-nav-link block px-4 py-3 rounded-lg text-stone-700 hover:bg-gold-50 hover:text-gold-700 transition text-lg font-medium">智慧助手</a>
+            <a href="#diy" class="mobile-nav-link block px-4 py-3 rounded-lg text-stone-700 hover:bg-gold-50 hover:text-gold-700 transition text-lg font-medium">手作工藝</a>
+            <a href="#faq" class="mobile-nav-link block px-4 py-3 rounded-lg text-stone-700 hover:bg-gold-50 hover:text-gold-700 transition text-lg font-medium">常見問答</a>
+        </div>
+    </header>
+
+    <div id="toast" class="fixed top-24 right-4 z-[100] transform translate-x-full opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-forest-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 border border-forest-700/50">
+            <div class="p-1.5 bg-gold-500 rounded-full text-forest-950">
+                <i data-lucide="check-circle" class="w-6 h-6"></i>
+            </div>
+            <div>
+                <p id="toast-message" class="text-base font-medium"></p>
+            </div>
+        </div>
+    </div>
+
+    <section id="home" class="relative overflow-hidden bg-stone-900 pt-16 pb-24 md:py-32 lg:py-40">
+        <div class="absolute inset-0 z-0">
+            <img src="https://img.win3000.com/m00/88/15/db5995e40460cbfe4c7d8ee2d392f150.jpg" alt="桂花背景" class="w-full h-full object-cover opacity-50 mix-blend-overlay">
+            <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-900/70 to-transparent"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-4xl mx-auto text-center space-y-8 mt-8 md:mt-12">
+                <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold bg-gold-500/20 text-gold-300 border border-gold-400/30 tracking-widest backdrop-blur">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> 木犀科學術與生活應用
+                </span>
+                <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight drop-shadow-2xl">
+                    人閑桂花落，<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-amber-300">九里飄香的底蘊。</span>
+                </h1>
+                <p class="text-stone-300 text-lg sm:text-xl leading-relaxed font-light drop-shadow-md max-w-3xl mx-auto">
+                    探索桂花（Osmanthus fragrans）的百年植物世界。從四大品種群的學術辨識、四季科學栽培指南，到傳統茶、蜜、酒的手作奧秘，打造您的桂花百科。
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 pt-8">
+                    <a href="#varieties" class="bg-gold-500 hover:bg-gold-600 text-stone-950 font-bold px-8 py-4 rounded-full transition shadow-lg hover:shadow-xl text-center flex items-center justify-center gap-2 text-lg">
+                        探索四大名桂 <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="varieties" class="py-24 bg-white scroll-mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="text-gold-600 text-sm font-bold uppercase tracking-widest block">學術辨識</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-extrabold text-stone-900 tracking-tight">
+                    品種圖鑑：四大名桂
+                </h2>
+                <div class="w-16 h-1.5 bg-gold-500 mx-auto rounded-full"></div>
+                <p class="text-stone-600 text-lg">
+                    依開花季節與外觀特徵，桂花可分為「四季桂」與「秋桂」兩大類。秋桂類又依花色分為金、銀、丹三大品種群。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div class="bg-stone-50 border border-stone-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                       <img src="https://cdn.phototourl.com/free/2026-06-12-872f3294-1b97-42d2-a11c-ac6f7d5e669d.jpg" alt="金桂" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-4 right-4 bg-amber-500 text-white font-bold text-xs px-3 py-1.5 rounded-full shadow-md">香氣巔峰</span>
+                    </div>
+                    <div class="p-6 md:p-8 flex-1 flex flex-col">
+                        <h3 class="font-serif font-bold text-2xl text-stone-900 mb-2">金桂 (Gold)</h3>
+                        <p class="text-sm text-stone-600 mb-6 flex-1 leading-relaxed">
+                            <strong class="text-stone-800">花色：</strong>金黃色至檸檬黃<br>
+                            <strong class="text-stone-800">特性：</strong>香氣最為濃郁，為桂花之冠。常見於中秋前後盛開。<br>
+                            <strong class="text-stone-800">用途：</strong>多用於提煉香料或食品加工，具備極佳食用價值。
+                        </p>
+                        <div class="w-full bg-stone-200 rounded-full h-2 mt-auto">
+                            <div class="bg-amber-500 h-2 rounded-full" style="width: 100%" title="香氣濃度"></div>
+                        </div>
+                        <p class="text-xs font-medium text-stone-500 mt-2 text-right">香氣濃度：極強</p>
+                    </div>
+                </div>
+
+                <div class="bg-stone-50 border border-stone-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="https://thumb.photo-ac.com/88/88048538432335278f45c5aaf2e70936_t.jpeg" alt="銀桂" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-4 right-4 bg-stone-500 text-white font-bold text-xs px-3 py-1.5 rounded-full shadow-md">清爽持久</span>
+                    </div>
+                    <div class="p-6 md:p-8 flex-1 flex flex-col">
+                        <h3 class="font-serif font-bold text-2xl text-stone-900 mb-2">銀桂 (Silver)</h3>
+                        <p class="text-sm text-stone-600 mb-6 flex-1 leading-relaxed">
+                            <strong class="text-stone-800">花色：</strong>純白色或乳白色<br>
+                            <strong class="text-stone-800">特性：</strong>香氣清雅持久，葉片較薄。秋季開花。<br>
+                            <strong class="text-stone-800">用途：</strong>適應範圍廣，主要用於園林造景，清新的色澤廣受喜愛。
+                        </p>
+                        <div class="w-full bg-stone-200 rounded-full h-2 mt-auto">
+                            <div class="bg-stone-400 h-2 rounded-full" style="width: 70%" title="香氣濃度"></div>
+                        </div>
+                        <p class="text-xs font-medium text-stone-500 mt-2 text-right">香氣濃度：中等</p>
+                    </div>
+                </div>
+
+                <div class="bg-stone-50 border border-stone-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                         <img src="https://fieldreport.caes.uga.edu/wp-content/uploads/2025/11/Osmanthus-fragrans-orange-flowers-1500x1000px.jpg" alt="丹桂" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-4 right-4 bg-orange-600 text-white font-bold text-xs px-3 py-1.5 rounded-full shadow-md">秋日一抹紅</span>
+                    </div>
+                    <div class="p-6 md:p-8 flex-1 flex flex-col">
+                        <h3 class="font-serif font-bold text-2xl text-stone-900 mb-2">丹桂 (Orange)</h3>
+                        <p class="text-sm text-stone-600 mb-6 flex-1 leading-relaxed">
+                            <strong class="text-stone-800">花色：</strong>橙黃轉至朱紅<br>
+                            <strong class="text-stone-800">特性：</strong>最具視覺衝擊力，葉片厚且深綠。香氣濃郁度僅次於金桂。<br>
+                            <strong class="text-stone-800">用途：</strong>因花色艷麗且寓意吉祥，常作庭園觀賞焦點。
+                        </p>
+                        <div class="w-full bg-stone-200 rounded-full h-2 mt-auto">
+                            <div class="bg-orange-500 h-2 rounded-full" style="width: 85%" title="香氣濃度"></div>
+                        </div>
+                        <p class="text-xs font-medium text-stone-500 mt-2 text-right">香氣濃度：強</p>
+                    </div>
+                </div>
+
+                <div class="bg-stone-50 border border-stone-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="aspect-[4/3] overflow-hidden relative">
+                        <img src="https://www.nkfa.org.tw/upload/images/390367_264880416906038_1538960126_n.jpg" alt="四季桂" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-4 right-4 bg-emerald-600 text-white font-bold text-xs px-3 py-1.5 rounded-full shadow-md">月月開花</span>
+                    </div>
+                    <div class="p-6 md:p-8 flex-1 flex flex-col">
+                        <h3 class="font-serif font-bold text-2xl text-stone-900 mb-2">四季桂</h3>
+                        <p class="text-sm text-stone-600 mb-6 flex-1 leading-relaxed">
+                            <strong class="text-stone-800">花色：</strong>淡黃或微偏乳黃<br>
+                            <strong class="text-stone-800">特性：</strong>全年可多次開花，香氣清淡。植株較矮小呈灌木狀。<br>
+                            <strong class="text-stone-800">用途：</strong>極適合台灣居家陽台盆栽種植，花期長是最大優勢。
+                        </p>
+                        <div class="w-full bg-stone-200 rounded-full h-2 mt-auto">
+                            <div class="bg-emerald-500 h-2 rounded-full" style="width: 40%" title="香氣濃度"></div>
+                        </div>
+                        <p class="text-xs font-medium text-stone-500 mt-2 text-right">香氣濃度：清淡</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="changhua" class="py-24 bg-stone-100 scroll-mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="text-forest-600 text-xs font-bold uppercase tracking-widest block">第二章</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
+                    彰化在地連結：走訪花鄉
+                </h2>
+                <div class="w-12 h-1 bg-forest-500 mx-auto rounded-full"></div>
+                <p class="text-stone-600">
+                    結合彰化在地人文與產業，探索鹿港藝術村的文化底蘊與田尾公路花園的園藝實力。
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-stone-200 flex flex-col md:flex-row group">
+                    <div class="md:w-1/2 h-64 md:h-auto overflow-hidden">
+                        <img src="https://tourism.chcg.gov.tw/upload/92/2024123013194289260.jpg" alt="鹿港桂花巷藝術村" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">鹿港桂花巷藝術村</h3>
+                        <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                            清治時期貿易河道旁遍植桂花，故得美名。雖然古樹多已不存，但日式宿舍群現轉型為藝術基地。
+                        </p>
+                        <ul class="text-xs text-stone-500 space-y-2 font-medium">
+                            <li><span class="text-blue-600 font-bold mr-1">✓</span> 藝術進駐：結合傳統工藝與現代創意。</li>
+                            <li><span class="text-blue-600 font-bold mr-1">✓</span> 文化地標：昭和氣息濃厚的打卡聖地。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-stone-200 flex flex-col md:flex-row-reverse group">
+                    <div class="md:w-1/2 h-64 md:h-auto overflow-hidden">
+                        <img src="https://tourism.chcg.gov.tw/upload/92/2024091016280398982.jpg" alt="田尾公路花園" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                        <div class="w-10 h-10 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center mb-4">
+                            <i data-lucide="flower-2" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3">田尾公路花園</h3>
+                        <h4 class="text-sm font-bold text-pink-600 mb-2">桂花的故鄉・全台最大花卉集散地</h4>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            擁有百餘年的花卉產業歷史，90%以上的居民從事園藝相關工作。尋找專業培育的各類桂花品種，田尾位置是首選。從庭園景觀大樹到室內小盆栽，完整產業鏈滿足所有需求。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cultivation" class="py-24 bg-stone-900 text-stone-300 scroll-mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-gold-400 text-sm font-bold uppercase tracking-widest block mb-2">科學化管理</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-extrabold text-white mb-6">
+                        桂花栽培成功關鍵
+                    </h2>
+                    <p class="text-stone-400 text-lg leading-relaxed mb-8">
+                        桂花喜溫暖、濕潤。秉持科學化的管理原則，任何人都能種植出健康茂密、香飄十里的精緻桂花。
+                    </p>
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-5">
+                            <div class="p-3 bg-white/10 rounded-xl text-gold-400 shrink-0"><i data-lucide="sun" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl text-white">充足光照 (春季)</h4>
+                                <p class="text-base text-stone-400 mt-2 leading-relaxed">為長日照植物，每日需6-8小時陽光。春芽萌發後，每月需施用稀薄有機肥（春補）蓄積元氣。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5">
+                            <div class="p-3 bg-white/10 rounded-xl text-blue-400 shrink-0"><i data-lucide="droplets" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl text-white">水分管理 (夏季)</h4>
+                                <p class="text-base text-stone-400 mt-2 leading-relaxed">高溫季需充分澆水，但盆栽忌諱積水。掌握「不乾不澆，澆則澆透」原則。梅雨季特別注意排水防炭疽病。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5">
+                            <div class="p-3 bg-white/10 rounded-xl text-orange-400 shrink-0"><i data-lucide="leaf" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl text-white">花期追肥 (秋季)</h4>
+                                <p class="text-base text-stone-400 mt-2 leading-relaxed">9月初開花前，進行最後一次以磷鉀肥為主的追肥（秋催），能顯著提高秋花產量與香氣濃郁度。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5">
+                            <div class="p-3 bg-white/10 rounded-xl text-emerald-400 shrink-0"><i data-lucide="scissors" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl text-white">休眠修剪 (冬季)</h4>
+                                <p class="text-base text-stone-400 mt-2 leading-relaxed">停止追肥（冬養）。在隔年早春萌芽前，對老枝進行疏剪，增加通風透光度，防病蟲害孳生。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative h-full min-h-[500px] rounded-[3rem] shadow-2xl border-4 border-stone-800">
+                    <img src="https://cdn.phototourl.com/free/2026-06-04-5b67f4db-1f4f-475b-8c0a-9cc3ab2fc90c.png" alt="桂花盆栽與園藝" class="w-full h-full object-cover">
+                    <div class="absolute -bottom-15 left-8 right-8 bg-stone-900/80 backdrop-blur-md py-3 px-4 rounded-2xl border border-stone-700">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gold-500 rounded-full flex items-center justify-center text-stone-900">
+                                <i data-lucide="shovel" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="text-gold-400 font-bold text-lg">梅雨季扦插法</p>
+                                <p class="text-stone-300 text-sm mt-1">選用半木質化枝條搭配生長激素，為成功率最高的繁殖法。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="interactive" class="py-24 bg-stone-100 scroll-mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="text-gold-600 text-sm font-bold uppercase tracking-widest block">AI 科技互動</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-extrabold text-stone-900 tracking-tight">
+                    園藝智慧辨識與日誌
+                </h2>
+                <div class="w-16 h-1.5 bg-gold-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-white rounded-3xl p-8 sm:p-10 border border-stone-200 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3 flex items-center gap-3">
+                            <i data-lucide="scan-eye" class="text-gold-500 w-8 h-8"></i> 病蟲害智慧診斷 (模擬)
+                        </h3>
+                        <p class="text-base text-stone-500 mb-8 leading-relaxed">我們已預載常見病徵資料庫，請選擇您的植物狀況，AI 將即時提供專家級臨床診斷：</p>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-base font-bold text-stone-700 mb-3">請選取主要觀察到的症狀：</label>
+                                <select id="pest-selector" onchange="diagnosePest()" class="w-full bg-stone-50 border-2 border-stone-200 text-stone-800 py-4 px-5 rounded-2xl focus:outline-none focus:ring-4 focus:ring-gold-400/30 focus:border-gold-500 text-base font-medium transition cursor-pointer">
+                                    <option value="">-- 點擊選擇植物狀態 --</option>
+                                    <option value="anthracnose">🍂 葉面出現圓形褐黑病斑，嚴重時枯死</option>
+                                    <option value="brown_spot">🍁 葉片出現褐色斑點，邊緣帶有黃色暈圈</option>
+                                    <option value="sooty_mold">⚫ 葉片表面覆蓋一層黑色如煤煙狀薄膜</option>
+                                    <option value="scale_insect">🪲 枝幹與葉背聚集白色/褐色硬殼狀小蟲</option>
+                                    <option value="whitefly">🦋 葉背布滿白色粉狀小蟲，觸碰時會飛散</option>
+                                </select>
+                            </div>
+
+                            <div id="diagnose-result" class="hidden bg-stone-50 border-2 border-dashed border-stone-300 p-8 rounded-3xl space-y-4">
+                                <div class="flex items-center justify-between border-b border-stone-200 pb-4">
+                                    <span class="text-sm font-bold text-amber-800 bg-amber-100 px-3 py-1 rounded-full" id="diag-tag">分類標籤</span>
+                                    <span class="text-sm font-bold text-stone-500 bg-white px-3 py-1 rounded-full border border-stone-200" id="diag-severity">嚴重度</span>
+                                </div>
+                                <h4 class="font-bold text-2xl text-stone-900 pt-2" id="diag-name">病害名稱</h4>
+                                <p class="text-base text-stone-600 leading-relaxed" id="diag-desc">症狀描述</p>
+                                <div class="pt-4 mt-2">
+                                    <p class="text-sm font-bold text-forest-800 flex items-center gap-2 mb-2"><i data-lucide="shield-check" class="w-5 h-5"></i> 防治建議指引：</p>
+                                    <p class="text-base text-stone-700 leading-relaxed bg-white p-4 rounded-xl border border-stone-200" id="diag-treatment">處理方式</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-stone-100 flex items-center justify-between text-sm text-stone-400">
+                        <span class="flex items-center gap-2"><i data-lucide="shield-alert" class="w-5 h-5 text-emerald-600"></i> 符合植物防疫法規建議</span>
+                        <span class="font-mono bg-stone-100 px-2 py-1 rounded">Ver 2.0</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 sm:p-10 border border-stone-200 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-3 flex items-center gap-3">
+                            <i data-lucide="book-heart" class="text-emerald-600 w-8 h-8"></i> 我的桂花栽培日記
+                        </h3>
+                        <p class="text-base text-stone-500 mb-8 leading-relaxed">點滴記錄您與桂花的成長。日誌將安全儲存於您當前的瀏覽器中：</p>
+
+                        <form id="journal-form" onsubmit="saveJournalEntry(event)" class="space-y-5">
+                            <div class="grid grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-bold text-stone-700 mb-2">紀錄日期：</label>
+                                    <input type="date" id="journal-date" required class="w-full bg-stone-50 border-2 border-stone-200 text-stone-800 py-3 px-4 rounded-xl focus:outline-none focus:ring-4 focus:ring-emerald-400/30 focus:border-emerald-500 text-base transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-stone-700 mb-2">主要動作：</label>
+                                    <select id="journal-action" class="w-full bg-stone-50 border-2 border-stone-200 text-stone-800 py-3 px-4 rounded-xl focus:outline-none focus:ring-4 focus:ring-emerald-400/30 focus:border-emerald-500 text-base font-medium transition cursor-pointer">
+                                        <option value="澆水">日常澆水 💧</option>
+                                        <option value="施肥">養分施肥 🌱</option>
+                                        <option value="修剪">修剪枝條 ✂️</option>
+                                        <option value="觀察">日常觀察 👀</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-stone-700 mb-2">日誌心情或筆記：</label>
+                                <textarea id="journal-content" placeholder="例：今天幫陽台的金桂加了發酵餅肥水，希望秋天開得更香！" required class="w-full bg-stone-50 border-2 border-stone-200 text-stone-800 py-4 px-4 rounded-xl focus:outline-none focus:ring-4 focus:ring-emerald-400/30 focus:border-emerald-500 text-base h-28 resize-none transition"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-forest-800 hover:bg-forest-900 text-white font-bold py-4 rounded-xl transition text-lg shadow-md hover:shadow-lg flex justify-center items-center gap-2">
+                                <i data-lucide="save" class="w-5 h-5"></i> 儲存一筆日記
+                            </button>
+                        </form>
+
+                        <div class="mt-10 border-t border-stone-100 pt-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-sm font-bold text-stone-800 bg-stone-100 px-3 py-1 rounded-lg">最新日記列表 (最多顯示 2 筆)</h4>
+                                <button onclick="clearJournal()" class="text-xs font-bold text-red-500 hover:text-white hover:bg-red-500 px-3 py-1 rounded-lg transition border border-red-200">清除全部</button>
+                            </div>
+                            <div id="journal-list" class="space-y-3 max-h-48 overflow-y-auto pr-2 no-scrollbar">
+                                <p class="text-base text-stone-400 text-center py-6 bg-stone-50 rounded-xl border border-dashed border-stone-200">目前尚無日記紀錄，寫下您的第一篇吧！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="diy" class="py-24 bg-white scroll-mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-gold-600 text-sm font-bold uppercase tracking-widest block">傳統手工藝</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-extrabold text-stone-900 tracking-tight">
+                    古法手作：生活應用延伸
+                </h2>
+                <div class="w-16 h-1.5 bg-gold-500 mx-auto rounded-full"></div>
+                <p class="text-stone-600 text-lg leading-relaxed mt-4">
+                    桂花全株皆富含芳香分子。我們為您挑選四款最普及的古法與現代手作提案，點擊查看具體的配料與嚴謹的製程指南。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+                <div class="bg-stone-50 border border-stone-200 rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition duration-500 flex flex-col group">
+                    <div class="aspect-[16/11] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?auto=format&fit=crop&w=600&q=80" alt="桂花茶" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <span class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur text-white text-xs font-bold tracking-widest px-3 py-1.5 rounded-lg shadow">難度 ★☆☆</span>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-4 flex-1 flex flex-col">
+                        <h3 class="font-serif font-bold text-2xl text-stone-900">傳統窨製桂花茶</h3>
+                        <div class="bg-gold-50 text-gold-800 text-sm font-bold px-3 py-2 rounded-lg border border-gold-200/60 inline-block">比例：鮮花 1 : 茶葉 4</div>
+                        <p class="text-base text-stone-600 flex-1 leading-relaxed">鮮花低溫烘乾後與茶葉拌勻密封「窨製」，使茶葉飽吸天然花香。</p>
+                        
+                        <button onclick="toggleDiyContent('diy-tea', 'icon-tea')" class="w-full mt-4 py-3 bg-white border-2 border-stone-200 hover:border-gold-400 hover:text-gold-700 text-stone-800 text-sm font-bold rounded-xl transition flex justify-center items-center gap-2">
+                            詳細工法 <i data-lucide="chevron-down" id="icon-tea" class="w-5 h-5 transition-transform duration-300"></i>
+                        </button>
+                        
+                        <div id="diy-tea" class="diy-content hidden mt-4 pt-4 border-t border-stone-200 text-sm text-stone-600 space-y-2.5 leading-relaxed bg-white p-4 rounded-xl shadow-inner">
+                            <p><span class="font-bold text-gold-600">1.</span> 將新鮮桂花挑除雜質並輕柔洗淨。</p>
+                            <p><span class="font-bold text-gold-600">2.</span> 陰乾或低溫烘乾至含水率約 5-10% (避免鮮花苦澀)。</p>
+                            <p><span class="font-bold text-gold-600">3.</span> 與茶葉 (如烏龍/綠茶) 依 1:4 重量比拌勻。</p>
+                            <p><span class="font-bold text-gold-600">4.</span> 放入密封罐「窨製」2-3天，防潮防霉，即可沖泡。保質期約半年。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-stone-50 border border-stone-200 rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition duration-500 flex flex-col group">
+                    <div class="aspect-[16/11] overflow-hidden relative">
+                        <img src="https://image-cdn-flare.qdm.cloud/q59631db779a01/image/data/2020/08/10/ea8a40cfcaed02de2e843965ec69566a.jpg" alt="桂花蜜" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <span class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur text-white text-xs font-bold tracking-widest px-3 py-1.5 rounded-lg shadow">難度 ★★☆</span>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-4 flex-1 flex flex-col">
+                        <h3 class="font-serif font-bold text-2xl text-stone-900">古法醃漬桂花蜜</h3>
+                        <div class="bg-gold-50 text-gold-800 text-sm font-bold px-3 py-2 rounded-lg border border-gold-200/60 inline-block">比例：鮮花 1 : 砂糖 0.5</div>
+                        <p class="text-base text-stone-600 flex-1 leading-relaxed">與砂糖、蜂蜜層層堆疊裝罐密封。發酵醃漬後熬煮，製成濃郁糖蜜。</p>
+                        
+                        <button onclick="toggleDiyContent('diy-honey', 'icon-honey')" class="w-full mt-4 py-3 bg-white border-2 border-stone-200 hover:border-gold-400 hover:text-gold-700 text-stone-800 text-sm font-bold rounded-xl transition flex justify-center items-center gap-2">
+                            詳細工法 <i data-lucide="chevron-down" id="icon-honey" class="w-5 h-5 transition-transform duration-300"></i>
+                        </button>
+                        
+                        <div id="diy-honey" class="diy-content hidden mt-4 pt-4 border-t border-stone-200 text-sm text-stone-600 space-y-2.5 leading-relaxed bg-white p-4 rounded-xl shadow-inner">
+                            <p><span class="font-bold text-gold-600">1.</span> 取未全開鮮花洗淨甩乾。</p>
+                            <p><span class="font-bold text-gold-600">2.</span> 拌入少許鹽靜置數小時出苦水去澀。</p>
+                            <p><span class="font-bold text-gold-600">3.</span> 在玻璃罐中「一層桂花、一層砂糖」交替堆疊。</p>
+                            <p><span class="font-bold text-gold-600">4.</span> 頂部淋蜂蜜封存醃漬數日。取出後加熱濃縮煮沸至濃稠即成。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-stone-50 border border-stone-200 rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition duration-500 flex flex-col group">
+                    <div class="aspect-[16/11] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80" alt="桂花酒" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <span class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur text-white text-xs font-bold tracking-widest px-3 py-1.5 rounded-lg shadow">難度 ★★☆</span>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-4 flex-1 flex flex-col">
+                        <h3 class="font-serif font-bold text-2xl text-stone-900">中秋佳釀桂花酒</h3>
+                        <div class="bg-gold-50 text-gold-800 text-sm font-bold px-3 py-2 rounded-lg border border-gold-200/60 inline-block">比例：白酒1瓶 : 乾花50g</div>
+                        <p class="text-base text-stone-600 flex-1 leading-relaxed">乾花與冰糖置於潔淨玻璃瓶內注入白酒，陰涼處長期浸泡萃取精華。</p>
+                        
+                        <button onclick="toggleDiyContent('diy-wine', 'icon-wine')" class="w-full mt-4 py-3 bg-white border-2 border-stone-200 hover:border-gold-400 hover:text-gold-700 text-stone-800 text-sm font-bold rounded-xl transition flex justify-center items-center gap-2">
+                            詳細工法 <i data-lucide="chevron-down" id="icon-wine" class="w-5 h-5 transition-transform duration-300"></i>
+                        </button>
+                        
+                        <div id="diy-wine" class="diy-content hidden mt-4 pt-4 border-t border-stone-200 text-sm text-stone-600 space-y-2.5 leading-relaxed bg-white p-4 rounded-xl shadow-inner">
+                            <p><span class="font-bold text-gold-600">1.</span> 準備無水無油的乾淨玻璃罐。</p>
+                            <p><span class="font-bold text-gold-600">2.</span> 放入 50-100g 徹底乾燥不帶蒂的桂花與適量冰糖。</p>
+                            <p><span class="font-bold text-gold-600">3.</span> 倒入 600ml 高粱或白酒密封。</p>
+                            <p><span class="font-bold text-gold-600">4.</span> 置於陰涼處，每週搖晃一次，浸泡 15-30 天後濾渣飲用。越陳越香。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-stone-50 border border-stone-200 rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition duration-500 flex flex-col group">
+                    <div class="aspect-[16/11] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&q=80" alt="桂花精油" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <span class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur text-white text-xs font-bold tracking-widest px-3 py-1.5 rounded-lg shadow">難度 ★★★</span>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-4 flex-1 flex flex-col">
+                        <h3 class="font-serif font-bold text-2xl text-stone-900">提煉香氛精油</h3>
+                        <div class="bg-gold-50 text-gold-800 text-sm font-bold px-3 py-2 rounded-lg border border-gold-200/60 inline-block">需大量鮮花與萃取設備</div>
+                        <p class="text-base text-stone-600 flex-1 leading-relaxed">透過專業蒸餾裝置或超臨界萃取，高壓低溫收集天然植物芳香分子。</p>
+                        
+                        <button onclick="toggleDiyContent('diy-oil', 'icon-oil')" class="w-full mt-4 py-3 bg-white border-2 border-stone-200 hover:border-gold-400 hover:text-gold-700 text-stone-800 text-sm font-bold rounded-xl transition flex justify-center items-center gap-2">
+                            詳細工法 <i data-lucide="chevron-down" id="icon-oil" class="w-5 h-5 transition-transform duration-300"></i>
+                        </button>
+                        
+                        <div id="diy-oil" class="diy-content hidden mt-4 pt-4 border-t border-stone-200 text-sm text-stone-600 space-y-2.5 leading-relaxed bg-white p-4 rounded-xl shadow-inner">
+                            <p><span class="font-bold text-gold-600">蒸餾法：</span></p>
+                            <p>1. 將數公斤鮮花置於蒸餾裝置中。</p>
+                            <p>2. 以飽和蒸汽將香精帶出，經冷凝管收集液體。</p>
+                            <p>3. 靜置水油分離，抽取上層純精油，下層為花水。</p>
+                            <p class="mt-2 text-xs text-red-600 font-bold">*也可採用食用溶劑與 CO₂ 超臨界低溫萃取，需專業防爆設備與符合化妝品法規。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="culture" class="py-24 bg-forest-950 text-white scroll-mt-12 overflow-hidden relative border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-gold-500 text-sm font-bold uppercase tracking-widest block mb-3">古典詩詞意境</span>
+                        <h2 class="font-serif text-4xl sm:text-5xl font-extrabold text-gold-300 mb-4">
+                            「人閑桂花落，<br>夜靜春山空。」
+                        </h2>
+                        <p class="text-lg font-bold text-stone-400 mt-2">———— 王維《鳥鳴澗》</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <p class="text-stone-300 leading-relaxed text-lg">
+                            桂花自古便是恬淡與隱逸的象徵。因「桂」與「貴」同音，也被賦予了大富大貴、吉祥美好的祥瑞象徵。
+                        </p>
+                        <p class="text-stone-300 leading-relaxed text-lg">
+                            科舉時代更以「蟾宮折桂」譬喻金榜題名與尊貴榮耀。中秋節時桂花盛開，人們常以「桂花」譬喻團圓美滿。
+                        </p>
+                    </div>
+
+                    <div class="bg-forest-900 border border-white/10 p-8 rounded-3xl relative shadow-xl">
+                        <i data-lucide="quote" class="absolute right-8 top-8 text-white/5 w-16 h-16 pointer-events-none"></i>
+                        <h4 class="font-serif text-xl font-semibold text-gold-400 mb-4">《鷓鴣天・桂花》 — 李清照</h4>
+                        <p class="font-serif text-stone-200 italic text-xl leading-relaxed">
+                            「暗淡輕黃體性柔，情疏跡遠只香留。<br>何須淺碧深紅色，自是花中第一流。」
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1601002242133-722166a9b46f?auto=format&fit=crop&w=1000&q=80" alt="中秋月圓桂花" class="rounded-[3rem] shadow-2xl border-4 border-stone-800">
+                    <div class="absolute -bottom-10 -left-10 bg-white p-8 rounded-3xl shadow-2xl border border-stone-100 max-w-sm">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="moon" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-2xl text-stone-900 mb-2">蟾宮折桂</h4>
+                        <p class="text-base text-stone-600 leading-relaxed">自古將中秋賞月與品桂結合，寓意團圓美滿與事業高昇。搭配四季常青的特性，為極佳的庭園景觀樹。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 bg-stone-100 scroll-mt-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-gold-600 text-sm font-bold uppercase tracking-widest block mb-2">疑難排解</span>
+                <h2 class="font-serif text-4xl font-black text-stone-900">常見問答 (FAQ)</h2>
+                <div class="w-16 h-1.5 bg-gold-500 mx-auto rounded-full mt-6"></div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-white border border-stone-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <button onclick="toggleFaq('faq-1', 'icon-1')" class="w-full px-8 py-6 text-left font-bold text-stone-800 text-lg flex justify-between items-center focus:outline-none bg-white hover:bg-stone-50">
+                        <span>桂花不開花或香氣很淡怎麼辦？</span>
+                        <div class="p-2 bg-stone-100 rounded-full shrink-0">
+                            <i data-lucide="chevron-down" id="icon-1" class="w-6 h-6 text-stone-500 transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div id="faq-1" class="hidden px-8 pb-8 text-base text-stone-600 leading-relaxed border-t border-stone-100 pt-6 bg-stone-50/50">
+                        這通常與光照和養分有關。桂花需要每天至少 <strong class="text-stone-800">6 小時的光照</strong>才能順利分化花芽。此外，若氮肥施用過多會導致徒長而不開花，建議在夏季（7月後）改施磷鉀肥來促進開花並提升香氣。若水分過多也容易導致花朵提前零落。
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-stone-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <button onclick="toggleFaq('faq-2', 'icon-2')" class="w-full px-8 py-6 text-left font-bold text-stone-800 text-lg flex justify-between items-center focus:outline-none bg-white hover:bg-stone-50">
+                        <span>種在盆栽裡要注意什麼？</span>
+                        <div class="p-2 bg-stone-100 rounded-full shrink-0">
+                            <i data-lucide="chevron-down" id="icon-2" class="w-6 h-6 text-stone-500 transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div id="faq-2" class="hidden px-8 pb-8 text-base text-stone-600 leading-relaxed border-t border-stone-100 pt-6 bg-stone-50/50">
+                        盆栽桂花最忌諱積水，務必選擇深盆與排水良好的微酸性砂質壤土。澆水把握「見乾見濕」原則，澆透但不積水。對於空間有限的陽台，強烈推薦種植體型較小、適應力強且花期長的<strong class="text-stone-800">「四季桂」</strong>。
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-stone-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <button onclick="toggleFaq('faq-3', 'icon-3')" class="w-full px-8 py-6 text-left font-bold text-stone-800 text-lg flex justify-between items-center focus:outline-none bg-white hover:bg-stone-50">
+                        <span>製作桂花茶可以直接用剛摘下來的花嗎？</span>
+                        <div class="p-2 bg-stone-100 rounded-full shrink-0">
+                            <i data-lucide="chevron-down" id="icon-3" class="w-6 h-6 text-stone-500 transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div id="faq-3" class="hidden px-8 pb-8 text-base text-stone-600 leading-relaxed border-t border-stone-100 pt-6 bg-stone-50/50">
+                        不建議直接泡水。新鮮桂花帶有澀味，且水分過高易腐壞。製作茶飲前，應先將鮮花洗淨去雜，並陰乾或低溫烘乾至含水率 5-10%（避免鮮花苦澀），再與茶葉以 1:4 比例進行窨製，風味才會純粹。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-stone-900 text-stone-400 py-16 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-10 pb-12 border-b border-stone-800">
+                <div class="space-y-4 text-center lg:text-left">
+                    <div class="flex items-center justify-center lg:justify-start gap-3 mb-6">
+                        <i data-lucide="flower-2" class="text-gold-500 w-8 h-8"></i>
+                        <span class="font-serif font-bold text-2xl text-white tracking-wider">九里飄香專題網</span>
+                    </div>
+                    <p class="text-sm text-stone-500 max-w-md leading-relaxed font-medium">
+                        主講人：蘇冠名 <br>
+                        專題地點：彰化鹿港與田尾。<br>
+                        帶您深度解析桂花四大品種群的奧秘、科學化栽培指南與在地傳統手作底蘊。
+                    </p>
+                </div>
+                <div class="text-center lg:text-right space-y-3">
+                    <h4 class="text-lg font-bold text-stone-300 mb-4">學術資料來源鳴謝</h4>
+                    <ul class="text-sm space-y-2 text-stone-500">
+                        <li><i data-lucide="book-open" class="w-4 h-4 inline mr-1 text-stone-600"></i> 行政院農業部 (農業知識入口網)</li>
+                        <li><i data-lucide="map-pin" class="w-4 h-4 inline mr-1 text-stone-600"></i> 彰化鹿港鎮公所</li>
+                        <li><i data-lucide="map-pin" class="w-4 h-4 inline mr-1 text-stone-600"></i> 彰化田尾公路花園</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 text-center text-sm text-stone-600 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>© 2026 桂花專題學術網站. 僅供展示與教育用途。</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-gold-500 transition">隱私權政策</a>
+                    <a href="#" class="hover:text-gold-500 transition">使用條款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化 Lucide 圖擺
+        lucide.createIcons();
+
+        // 1. 行動端導覽列切換
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        });
+
+        // 點選行動端選單連結後自動縮回
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        // 2. 自訂 Toast 通知
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            msgEl.innerText = message;
+            
+            toast.classList.remove('translate-x-full', 'opacity-0');
+            toast.classList.add('translate-x-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-x-0', 'opacity-100');
+                toast.classList.add('translate-x-full', 'opacity-0');
+            }, 3000);
+        }
+
+        // 3. 產品 DIY 詳細工法展開切換 (修復與強化)
+        function toggleDiyContent(contentId, iconId) {
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // 4. FAQ 切換顯示邏輯 (修復與強化)
+        function toggleFaq(contentId, iconId) {
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+            
+            if (content.classList.contains('hidden')) {
+                // 展開
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                // 收合
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // 5. 智慧診斷 AI (根據 PDF 資料庫)
+        const diagnosisDatabase = {
+            anthracnose: {
+                tag: "真菌葉部病害", severity: "嚴重度：中等", name: "炭疽病 (Anthracnose)",
+                desc: "桂花相當常見的真菌性葉部病害，好發於高濕、通風不良環境。病原體隨風雨飛濺傳播。",
+                treatment: "立即清理、剪除並銷毀病葉，避免孢子隨澆水飛濺；發病初期可噴灑多菌靈或廣譜性殺菌劑治療。"
+            },
+            brown_spot: {
+                tag: "真菌葉部病害", severity: "嚴重度：輕微至中等", name: "褐斑病、枯斑病",
+                desc: "葉面出現不規則邊緣有黃色暈圈的褐色病斑，導致光合作用受阻，嚴重時引起枯黃落葉。",
+                treatment: "加強修剪與透風。必要時使用含銅殺菌劑（如波爾多液）或三唑類化學保護劑進行全株噴施。"
+            },
+            sooty_mold: {
+                tag: "黴真菌衍生病害", severity: "嚴重度：中等至嚴重", name: "煤煙病 (Sooty Mold)",
+                desc: "葉面覆蓋黑色煤煙狀菌膜，由介殼蟲、粉蝨等害蟲分泌之蜜露大量寄生真菌所產生。",
+                treatment: "防治根本在「除蟲」。先清除介殼蟲與粉蝨切斷蜜露來源，再用稀釋肥皂液擦拭葉片黑色黴層，並加強通風。"
+            },
+            scale_insect: {
+                tag: "刺吸式蟲害", severity: "嚴重度：嚴重", name: "介殼蟲 (Scale Insects)",
+                desc: "群集附著於桂花嫩枝與葉背，體表覆蓋白粉或硬殼，吸食汁液並誘發煤煙病。",
+                treatment: "數量少時用軟刷人工清除。爆發時剪除受害枝條，並噴施園藝油、殺蟲皂液或低毒高效殺蟲劑。"
+            },
+            whitefly: {
+                tag: "群聚式害蟲", severity: "嚴重度：中等", name: "黑刺粉蝨 (Whitefly)",
+                desc: "聚集在嫩葉背面吸食汁液，排泄黏稠蜜露誘發霉菌。觸碰時會大量飛散。",
+                treatment: "樹冠周圍懸掛黃色黏膠板物理誘捕。配合除蟲菊酯類針對葉背進行高壓噴淋。"
+            }
+        };
+
+        function diagnosePest() {
+            const selector = document.getElementById('pest-selector');
+            const resultBox = document.getElementById('diagnose-result');
+            const val = selector.value;
+
+            if (!val) {
+                resultBox.classList.add('hidden');
+                return;
+            }
+
+            const data = diagnosisDatabase[val];
+            document.getElementById('diag-tag').innerText = data.tag;
+            document.getElementById('diag-severity').innerText = data.severity;
+            document.getElementById('diag-name').innerText = data.name;
+            document.getElementById('diag-desc').innerText = data.desc;
+            document.getElementById('diag-treatment').innerText = data.treatment;
+
+            resultBox.classList.remove('hidden');
+        }
+
+        // 6. 互動栽培日記 (存於 Local Storage)
+        let journalEntries = [];
+
+        window.onload = function() {
+            // 設定今日日期
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('journal-date').value = today;
+
+            // 讀取既有日誌
+            const saved = localStorage.getItem('osmanthus_journals_v2');
+            if (saved) {
+                try {
+                    journalEntries = JSON.parse(saved);
+                    renderJournals();
+                } catch(e) {
+                    journalEntries = [];
+                }
+            }
+        }
+
+        function saveJournalEntry(e) {
+            e.preventDefault();
+            const dateInput = document.getElementById('journal-date').value;
+            const actionInput = document.getElementById('journal-action').value;
+            const contentInput = document.getElementById('journal-content').value;
+
+            const newEntry = {
+                id: Date.now(),
+                date: dateInput,
+                action: actionInput,
+                content: contentInput
+            };
+
+            journalEntries.unshift(newEntry);
+            localStorage.setItem('osmanthus_journals_v2', JSON.stringify(journalEntries));
+            
+            document.getElementById('journal-content').value = '';
+            
+            renderJournals();
+            showToast("日記儲存成功！🎉");
+        }
+
+        function renderJournals() {
+            const listEl = document.getElementById('journal-list');
+            if (journalEntries.length === 0) {
+                listEl.innerHTML = '<p class="text-base text-stone-400 text-center py-6 bg-stone-50 rounded-xl border border-dashed border-stone-200">目前尚無日記紀錄，寫下您的第一篇吧！</p>';
+                return;
+            }
+
+            // 只展示前兩筆
+            const displayEntries = journalEntries.slice(0, 2);
+            let html = '';
+            displayEntries.forEach(entry => {
+                html += `
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-2 relative shadow-sm">
+                        <div class="flex justify-between items-center text-xs text-stone-400 border-b border-stone-200/50 pb-2">
+                            <span class="font-mono text-stone-500">${entry.date}</span>
+                            <span class="font-bold text-forest-800 bg-emerald-100 px-2 py-1 rounded-md tracking-wider">${entry.action}</span>
+                        </div>
+                        <p class="text-stone-800 font-medium leading-relaxed text-base">${entry.content}</p>
+                    </div>
+                `;
+            });
+            listEl.innerHTML = html;
+        }
+
+        function clearJournal() {
+            journalEntries = [];
+            localStorage.removeItem('osmanthus_journals_v2');
+            renderJournals();
+            showToast("栽培日記已全部清除 🗑️");
+        }
+    </script>
+</body>
+</html>
