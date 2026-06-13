@@ -4,7 +4,7 @@
 > **大學生植物科普、在地創生與網頁前端互動之跨界專題研究**
 > A Cross-Boundary Study on Botanical Science, Local Revitalization, and Web Front-End Interaction.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-blue?style=for-the-badge&logo=github&logoColor=white)](https://su2006sgm.github.io/你的儲存庫名稱/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-blue?style=for-the-badge&logo=github&logoColor=white)](https://su2006sgm.github.io/osmanthus/)
 ![Tech Stack](https://img.shields.io/badge/Tech_Stack-HTML5%20%7C%20TailwindCSS%20%7C%20VanillaJS-orange?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-Academic_Educational-green?style=for-the-badge)
 
